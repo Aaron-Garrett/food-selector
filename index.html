@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dinner Roulette</title>
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="scene">
+    <div class="steam s1"></div>
+    <div class="steam s2"></div>
+    <div class="steam s3"></div>
+
+    <header class="hero">
+      <p class="kicker">Nobody can decide, so we let physics decide</p>
+      <h1>Dinner Roulette</h1>
+      <p class="sub">Give it a spin. Wherever it lands, that's tonight's table.</p>
+    </header>
+
+    <main class="wheel-area">
+      <div class="pointer" aria-hidden="true"></div>
+
+      <div class="wheel-wrap">
+        <div id="wheel" class="wheel"></div>
+        <button id="hub" class="hub" type="button" aria-label="Spin the wheel">
+          <span>SPIN</span>
+        </button>
+      </div>
+    </main>
+
+    <div id="result" class="result" aria-live="polite">
+      <p class="result-eyebrow">Tonight, we're eating at</p>
+      <h2 id="result-name">&nbsp;</h2>
+      <p id="result-line" class="result-line">&nbsp;</p>
+      <button id="again" class="again" type="button" hidden>Spin again</button>
+    </div>
+
+    <footer class="foot">
+      <p>Options: Opa · Steak n Shake · A1 Steakhouse · El Toro · Thai Orchid · Chili's · Chipotle</p>
+    </footer>
+  </div>
+
+  <div id="confetti-layer" aria-hidden="true"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>

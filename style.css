@@ -1,0 +1,281 @@
+/* ---------- Tokens ---------- */
+:root{
+  --bg-0: #1c1712;
+  --bg-1: #241d17;
+  --cream: #fff6e9;
+  --cream-dim: #d9cdbd;
+  --gold: #f4a300;
+  --gold-deep: #c97e00;
+  --line: rgba(255,246,233,0.14);
+
+  --seg-1: #d62828; /* Opa */
+  --seg-2: #f4a300; /* Steak n Shake */
+  --seg-3: #6c3b6e; /* A1 Steakhouse */
+  --seg-4: #e07a28; /* El Toro */
+  --seg-5: #1b998b; /* Thai Orchid */
+  --seg-6: #a32638; /* Chili's */
+  --seg-7: #6a8e3c; /* Chipotle */
+
+  --font-display: "Anton", "Arial Narrow", sans-serif;
+  --font-body: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+*{ box-sizing: border-box; }
+
+html,body{
+  margin:0;
+  min-height:100%;
+  background: radial-gradient(120% 140% at 50% -10%, var(--bg-1) 0%, var(--bg-0) 60%);
+  color: var(--cream);
+  font-family: var(--font-body);
+}
+
+body{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding: 32px 18px 48px;
+  overflow-x:hidden;
+}
+
+.scene{
+  position:relative;
+  width:100%;
+  max-width: 560px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+}
+
+/* ---------- Background steam / ambience ---------- */
+.steam{
+  position:fixed;
+  border-radius:50%;
+  filter: blur(60px);
+  opacity:.16;
+  pointer-events:none;
+  z-index:0;
+}
+.s1{ width:420px; height:420px; background:var(--seg-1); top:-140px; left:-120px; }
+.s2{ width:380px; height:380px; background:var(--seg-5); bottom:-160px; right:-120px; }
+.s3{ width:300px; height:300px; background:var(--seg-4); top:40%; left:60%; }
+
+/* ---------- Hero ---------- */
+.hero{ position:relative; z-index:1; margin-bottom: 18px; }
+
+.kicker{
+  margin:0 0 6px;
+  font-size: 13px;
+  color: var(--gold);
+  font-weight: 700;
+  letter-spacing: .02em;
+}
+
+h1{
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2.6rem, 9vw, 3.6rem);
+  line-height: .95;
+  margin: 0 0 10px;
+  color: var(--cream);
+  text-shadow: 0 3px 0 rgba(0,0,0,.25);
+}
+
+.sub{
+  margin:0;
+  color: var(--cream-dim);
+  font-size: 15px;
+  max-width: 340px;
+  margin-inline:auto;
+}
+
+/* ---------- Wheel area ---------- */
+.wheel-area{
+  position:relative;
+  z-index:1;
+  margin: 22px 0 6px;
+}
+
+.pointer{
+  position:absolute;
+  top:-6px;
+  left:50%;
+  transform: translateX(-50%);
+  width:0; height:0;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-top: 26px solid var(--cream);
+  filter: drop-shadow(0 3px 3px rgba(0,0,0,.4));
+  z-index:3;
+}
+
+.wheel-wrap{
+  position:relative;
+  width: min(78vw, 340px);
+  height: min(78vw, 340px);
+  margin-top: 18px;
+}
+
+.wheel{
+  position:absolute;
+  inset:0;
+  border-radius:50%;
+  border: 8px solid var(--cream);
+  box-shadow:
+    0 0 0 3px rgba(0,0,0,.35),
+    0 18px 40px rgba(0,0,0,.45),
+    inset 0 0 0 2px rgba(0,0,0,.15);
+  transform: rotate(0deg);
+  will-change: transform;
+}
+
+.wheel-label{
+  position:absolute;
+  top:50%;
+  left:50%;
+  height: 2px;
+  width: 50%;
+  transform-origin: 0% 50%;
+  display:flex;
+  align-items:center;
+  pointer-events:none;
+}
+
+.wheel-label span{
+  display:inline-block;
+  padding-left: 20px;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 12.5px;
+  line-height: 1.05;
+  color: var(--cream);
+  text-shadow: 0 1px 2px rgba(0,0,0,.5);
+  max-width: 92px;
+  white-space: normal;
+}
+
+/* Hub / spin button sits centered on top of the wheel */
+.hub{
+  position:absolute;
+  top:50%; left:50%;
+  transform: translate(-50%,-50%);
+  width: 78px; height: 78px;
+  border-radius:50%;
+  z-index:4;
+  background: radial-gradient(circle at 35% 30%, #ffcf5c, var(--gold) 55%, var(--gold-deep) 100%);
+  border: 4px solid var(--cream);
+  box-shadow: 0 6px 14px rgba(0,0,0,.5);
+  cursor:pointer;
+  font-family: var(--font-display);
+  font-size: 18px;
+  letter-spacing: .03em;
+  color: #3a2200;
+  transition: transform .15s ease;
+}
+.hub:hover{ transform: translate(-50%,-50%) scale(1.04); }
+.hub:active{ transform: translate(-50%,-50%) scale(.97); }
+.hub:focus-visible{ outline: 3px solid var(--cream); outline-offset: 3px; }
+.hub[disabled]{ cursor:not-allowed; opacity:.85; }
+
+/* ---------- Result panel ---------- */
+.result{
+  position:relative;
+  z-index:1;
+  margin-top: 26px;
+  min-height: 108px;
+  width:100%;
+  max-width: 420px;
+  padding: 18px 22px 22px;
+  border-radius: 18px;
+  background: rgba(255,246,233,0.05);
+  border: 1px solid var(--line);
+}
+
+.result-eyebrow{
+  margin:0 0 4px;
+  font-size: 13px;
+  color: var(--cream-dim);
+}
+
+#result-name{
+  font-family: var(--font-display);
+  font-weight:400;
+  font-size: clamp(1.6rem, 6vw, 2.1rem);
+  margin: 0 0 6px;
+  color: var(--gold);
+  min-height: 1.2em;
+}
+
+.result-line{
+  margin:0;
+  font-size: 14px;
+  font-style: italic;
+  color: var(--cream-dim);
+  min-height: 1.4em;
+}
+
+.again{
+  margin-top: 14px;
+  background:none;
+  border: 1.5px solid var(--cream-dim);
+  color: var(--cream);
+  font-family: var(--font-body);
+  font-weight:700;
+  font-size: 13px;
+  padding: 9px 18px;
+  border-radius: 999px;
+  cursor:pointer;
+  transition: border-color .15s ease, background .15s ease;
+}
+.again:hover{ border-color: var(--gold); background: rgba(244,163,0,.08); }
+.again:focus-visible{ outline: 3px solid var(--gold); outline-offset: 2px; }
+
+/* ---------- Footer ---------- */
+.foot{
+  position:relative;
+  z-index:1;
+  margin-top: 30px;
+}
+.foot p{
+  margin:0;
+  font-size: 11.5px;
+  color: rgba(217,205,189,.55);
+  max-width: 380px;
+}
+
+/* ---------- Confetti ---------- */
+#confetti-layer{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  overflow:hidden;
+  z-index:5;
+}
+.confetti-piece{
+  position:absolute;
+  top:-12px;
+  width:8px;
+  height:14px;
+  opacity:0;
+  border-radius:2px;
+}
+
+@keyframes confetti-fall{
+  0%{ opacity:1; transform: translateY(0) rotate(0deg); }
+  100%{ opacity:0; transform: translateY(70vh) rotate(540deg); }
+}
+
+/* ---------- Motion & spin state ---------- */
+.wheel.spinning{
+  transition: transform 4.2s cubic-bezier(0.17, 0.67, 0.1, 1);
+}
+
+@media (prefers-reduced-motion: reduce){
+  .wheel.spinning{ transition: transform .6s ease-out; }
+  .confetti-piece{ animation-duration: .01s !important; }
+}
+
+@media (max-width: 380px){
+  .wheel-label span{ font-size: 11px; max-width: 78px; }
+}
